@@ -21,6 +21,7 @@ public class Doctor extends User {
         this.speciality = speciality;
     }
 
+
     //Comportamientos
     ArrayList<AvailableApoitment> availableApoitments = new ArrayList<>();
     public void addAvailableAppoitment(Date date, String time){
@@ -34,6 +35,12 @@ public class Doctor extends User {
     @Override
     public String toString() {
         return super.toString() + "\nSpeciality: " + speciality + "\nAvailable: " + availableApoitments.toString();
+    }
+
+    @Override
+    public void showDataUser() {
+        System.out.println("Empleado Hospital: Cruz Roja");
+        System.out.println("Departamento: Cancerología");
     }
 
     public static class AvailableApoitment{
