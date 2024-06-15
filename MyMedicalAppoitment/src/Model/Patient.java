@@ -1,26 +1,36 @@
 package Model;
 
 public class Patient extends User {
-
-
+    //Atributos
     private String birthday;
-    private String blood;
-    private double height;
     private double weight;
+    private double height;
+    private String blood;
 
     public Patient(String name, String email){
-        super(name, email);
+        super(name,email);
+        //mas instrucciones
     }
 
-    public void setWeight(double weight){
+    // 54.5
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
+    // 54.5 Kg. String
     public String getWeight(){
         return this.weight + " Kg.";
     }
 
-    
+
+    public String getHeight() {
+        return height + " Mts.";
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
     public String getBirthday() {
         return birthday;
     }
@@ -37,22 +47,16 @@ public class Patient extends User {
         this.blood = blood;
     }
 
-    public String getHeight() {
-        return height + " Mts.";
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
     @Override
     public String toString() {
-        return super.toString() + "\nAge: " + birthday + "\nWeight: " + getWeight() + "\nHeight: " + getHeight() + "\nBlood: " + blood;
+        return super.toString() + "\nAge: " + birthday + "\n Weight: " +getWeight()+ "\n Height"+getHeight()+"\nBlood"+blood;
     }
 
     @Override
     public void showDataUser() {
         System.out.println("Paciente");
-        System.out.println("Historial completo desde el nacimiento");
+        System.out.println("Historial completo desde naciemiento");
+
     }
+
 }

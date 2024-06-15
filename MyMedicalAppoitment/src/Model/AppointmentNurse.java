@@ -2,27 +2,19 @@ package Model;
 
 import java.util.Date;
 
-public class AppointmentNurse implements ISchedulable {
+public class AppointmentNurse implements ISchedulable{
     private int id;
     private Nurse nurse;
     private Patient patient;
     private Date date;
     private String time;
 
-    public Date getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Nurse getNurse() {
@@ -33,12 +25,20 @@ public class AppointmentNurse implements ISchedulable {
         this.nurse = nurse;
     }
 
-    public int getId() {
-        return id;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getTime() {
