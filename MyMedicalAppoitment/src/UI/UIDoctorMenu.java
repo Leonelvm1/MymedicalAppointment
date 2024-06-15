@@ -1,10 +1,17 @@
 package UI;
 
+import Model.Doctor;
+
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UIDoctorMenu {
-    public static void showDoctorMenu(){
+
+    public static ArrayList<Doctor> doctorsAvailableAppointments = new ArrayList<>();
+
+    public static void showDoctorMenu() throws ParseException {
+
         int response = 0;
         do{
             System.out.println("\n\n");
@@ -19,6 +26,7 @@ public class UIDoctorMenu {
 
             switch (response){
                 case 1:
+                    showAvailableAppointmentsMenu();
                     break;
                 case 2:
                     break;
@@ -48,7 +56,7 @@ public class UIDoctorMenu {
             if (response > 0 && response < 4){
                 // 1,2,3
                 int monthselected = response;
-                System.out.println(monthselected + " ." + UIMenu.MONTHS[monthselected]);
+                System.out.println(monthselected + " ." + UIMenu.MONTHS[monthselected - 1]);
 
                 System.out.println("Insert the date available: [dd/mm/yyyy");
                 String date = sc.nextLine();
@@ -66,10 +74,19 @@ public class UIDoctorMenu {
                     responseTime = Integer.valueOf(sc.nextLine());
                 }while (responseTime == 2);
                 UIMenu.doctorLogged.addAvailableAppointment(date,time);
+                checkDoctorAvailableAppointments(UIMenu.doctorLogged);
+
             }else if(response == 0){
                 showDoctorMenu();
             }
 
         }while(response !=0);
+    }
+
+    private static void checkDoctorAvailableAppointments(Doctor doctor){
+        if (doctor.getAvailableAppointments().size() > 0
+                && !doctorsAvailableAppointments.contains(doctor)){
+            doctorsAvailableAppointments.add(doctor);
+        }
     }
 }

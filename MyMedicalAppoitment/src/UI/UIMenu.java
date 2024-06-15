@@ -3,16 +3,17 @@ package UI;
 import Model.Doctor;
 import Model.Patient;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UIMenu {
 
-    public static final String[] MONTHS = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    public static final String[] MONTHS = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     public static Doctor doctorLogged;
     public static Patient patinetLogged;
 
-    public static void showMenu(){
+    public static void showMenu() {
         System.out.println("Welcome to My Appointments");
         System.out.println("Selecciona la opción deseada");
 
@@ -25,15 +26,24 @@ public class UIMenu {
             Scanner sc = new Scanner(System.in);
             response = Integer.valueOf(sc.nextLine());
 
-            switch (response){
+            switch (response) {
                 case 1:
                     System.out.println("Doctor");
                     response = 0;
-                    authUser(1);
+                    try {
+                        authUser(1);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 2:
+                    showPatientMenu();
                     response = 0;
-                    authUser(2);
+                    try {
+                        authUser(2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 0:
                     System.out.println("Thank you for you visit");
@@ -41,10 +51,10 @@ public class UIMenu {
                 default:
                     System.out.println("Please select a correct answer");
             }
-        }while (response != 0);
+        } while (response != 0);
     }
 
-    private static void authUser(int userType){
+    private static void authUser(int userType) throws ParseException {
         //userType = 1 Doctor
         //userType = 2 Patient
 
@@ -58,39 +68,37 @@ public class UIMenu {
         patients.add(new Patient("Roberto Rodríguez", "roberto@mail.com"));
         patients.add(new Patient("Carlos Sánchez", "carlos@mail.com"));
 
-
         boolean emailCorrect = false;
         do {
             System.out.println("Insert your email: [a@a.com]");
             Scanner sc = new Scanner(System.in);
             String email = sc.nextLine();
-            if (userType == 1){
-                for (Doctor d: doctors){
-                    if (d.getEmail().equals(email)){
+            if (userType == 1) {
+                for (Doctor d : doctors) {
+                    if (d.getEmail().equals(email)) {
                         emailCorrect = true;
                         //Obtener el usuario logeado
                         doctorLogged = d;
-                        //showDoctorMenu
+                        UIDoctorMenu.showDoctorMenu();
                     }
                 }
             }
 
-            if (userType == 2){
-                for (Patient p: patients){
-                    if (p.getEmail().equals(email)){
+            if (userType == 2) {
+                for (Patient p : patients) {
+                    if (p.getEmail().equals(email)) {
                         emailCorrect = true;
                         patinetLogged = p;
-                        //showPatientMenu
+                        UIPatientMenu.showPatientMenu();
                     }
                 }
             }
 
-
-        }while (!emailCorrect);
+        } while (!emailCorrect);
 
     }
 
-    static void showPatientMenu(){
+    static void showPatientMenu() {
         int response = 0;
         do {
             System.out.println("\n\n");
@@ -102,11 +110,11 @@ public class UIMenu {
             Scanner sc = new Scanner(System.in);
             response = Integer.valueOf(sc.nextLine());
 
-            switch (response){
+            switch (response) {
                 case 1:
                     System.out.println("::Book an appointment");
                     for (int i = 1; i < 4; i++) {
-                        System.out.println(i +". " + MONTHS[i]);
+                        System.out.println(i + ". " + MONTHS[i]);
                     }
                     break;
                 case 2:
@@ -116,6 +124,6 @@ public class UIMenu {
                     showMenu();
                     break;
             }
-        }while (response != 0);
+        } while (response != 0);
     }
 }
